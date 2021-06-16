@@ -9,7 +9,24 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 
 export default () => {
-  const [chatlist, setChatlist] = useState([{}, {}, {}, {}]);
+  const [chatlist, setChatlist] = useState([
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ]);
 
   return (
     <div className="app-window">
