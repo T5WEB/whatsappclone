@@ -12,7 +12,9 @@ import CloseIcon from "@material-ui/icons/Close";
 import SendIcon from "@material-ui/icons/Send";
 import MicIcon from "@material-ui/icons/Mic";
 
-export default () => {
+export default ({ user }) => {
+  const body = React.useRef();
+
   let recognition = null;
   let SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -24,7 +26,51 @@ export default () => {
   const [emojiOpen, setEmojiOpen] = React.useState(false);
   const [text, setText] = React.useState("");
   const [listening, setListening] = React.useState(false);
-  const [list, setList] = React.useState([{}, {}, {}]);
+  const [list, setList] = React.useState([
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+    { author: 123, body: "bla bla bla" },
+    { author: 123, body: "bla bla" },
+    { author: 1234, body: "bla bla bla bla" },
+  ]);
+
+  React.useEffect(() => {
+    if (body.current.scrollHeight > body.current.offsetHeight) {
+      body.current.scrollTop =
+        body.current.scrollHeight - body.current.offsetHeight;
+    }
+  }, [list]);
 
   const handleEmojiClick = (e, emojiObject) => {
     setText(text + emojiObject.emoji);
@@ -80,9 +126,9 @@ export default () => {
           </div>
         </div>
       </div>
-      <div className="chatWindow--body">
+      <div ref={body} className="chatWindow--body">
         {list.map((item, key) => (
-          <MessageItem key={key} data={item} />
+          <MessageItem key={key} data={item} user={user} />
         ))}
       </div>
       <div
