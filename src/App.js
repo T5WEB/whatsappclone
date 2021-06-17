@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 
 import ChatListItem from "./components/ChatListItem";
 import ChatIntro from "./components/ChatIntro";
 import ChatWindow from "./components/ChatWindow";
+import NewChat from "./components/NewChat";
 
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -11,7 +12,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 
 export default () => {
-  const [chatlist, setChatlist] = useState([
+  const [chatlist, setChatlist] = React.useState([
     {
       chatId: 1,
       title: "Fulano de tal",
@@ -33,16 +34,30 @@ export default () => {
       image: "https://www.w3schools.com/howto/img_avatar2.png",
     },
   ]);
-  const [activeChat, setActiveChat] = useState([{}]);
-  const [user, setUser] = useState({
+  const [activeChat, setActiveChat] = React.useState([{}]);
+
+  const [user, setUser] = React.useState({
     id: 1234,
     avatar: "https://www.w3schools.com/howto/img_avatar2.png",
     name: "Tiago",
   });
 
+  const [showNewChat, setShowNewChat] = React.useState(false);
+
+  const handleNewChat = () => {
+    setShowNewChat(true);
+  };
+
   return (
     <div className="app-window">
       <div className="sidebar">
+        <NewChat
+          chatlist={chatlist}
+          user={user}
+          show={showNewChat}
+          setShow={setShowNewChat}
+        />
+
         <header>
           <img className="header--avatar" src={user.avatar} alt="avatar" />
 
@@ -51,7 +66,7 @@ export default () => {
               <DonutLargeIcon style={{ color: "#919191" }} />
             </div>
 
-            <div className="header--btn">
+            <div onClick={handleNewChat} className="header--btn">
               <ChatIcon style={{ color: "#919191" }} />
             </div>
 
